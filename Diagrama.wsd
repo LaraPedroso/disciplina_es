@@ -1,0 +1,35 @@
+@startuml
+skinparam actorStyle awesome
+actor "User" as fc
+rectangle Sistema { 
+left to right direction
+rectangle Formulario {
+
+  usecase "Data Admissão" as UC1
+  usecase "Data Saida" as UC2
+  usecase "Nova Empresa" as UC3
+  usecase "Localização " as UC4
+  usecase "Feedback" as UC5
+}
+fc --> UC1
+fc --> UC2
+fc --> UC3
+fc --> UC4
+fc --> UC5
+
+usecase "Mapa" as UC6
+usecase "Historico Empresa" as UC7
+usecase "Excluir Empresa" as UC8
+fc --> UC6
+(UC7) .> (UC8) : extend
+(UC6) .> (UC7) : include
+usecase "Editar Feedback" as UC9
+usecase "Apagar Feedback" as UC10
+
+(UC5) .> (UC9) : extend 
+(UC9) .> (UC10) : extend
+}
+fc --> UC9 #line:red;line.bold;text:red 
+:Admin: -right->(UC8) #line:green;line.bold;text:green 
+:Admin: -left->(UC9) #line:blue;line.bold;text:blue 
+@enduml
